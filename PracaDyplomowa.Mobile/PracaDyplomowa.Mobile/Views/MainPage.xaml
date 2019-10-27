@@ -3,18 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:PracaDyplomowa.Mobile.ViewModels"
+             xmlns:controls="clr-namespace:PracaDyplomowa.Mobile.Controls"
              mc:Ignorable="d"
              BackgroundImageSource="Assets/menuback.png"
              NavigationPage.HasNavigationBar="False"
              x:Class="PracaDyplomowa.Mobile.MainPage">
 
-    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BindableLayout.ItemsSource="{Binding MenuItems}">
+    <controls:MenuItemsGrid MenuItems="{Binding MenuItems}" />
+
+    <!--<StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BindableLayout.ItemsSource="{Binding MenuItems}">
         <BindableLayout.ItemTemplate>
             <DataTemplate>
                     <Button Text="{Binding Label}" Command="{Binding OnClickCommand}" CommandParameter="{Binding}"/>
             </DataTemplate>
         </BindableLayout.ItemTemplate>
-    </StackLayout>
+    </StackLayout>-->
 
 </ContentPage>

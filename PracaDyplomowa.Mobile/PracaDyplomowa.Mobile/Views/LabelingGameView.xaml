@@ -4,25 +4,14 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:PracaDyplomowa.Mobile.Extensions"
+             xmlns:controls="clr-namespace:PracaDyplomowa.Mobile.Controls"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="False"
              x:Class="PracaDyplomowa.Mobile.Views.LabelingGameView">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <ImageButton Grid.Row="0" Grid.Column="0" Source="{local:ImageResource PracaDyplomowa.Mobile.Assets.Labeling.aparat.png}" Command="{Binding ChooseImageCommand}" />
-            <ImageButton Grid.Row="0" Grid.Column="1" Source="{local:ImageResource PracaDyplomowa.Mobile.Assets.Labeling.aparat.png}" Command="{Binding ChooseImageCommand}" />
-            <ImageButton Grid.Row="1" Grid.Column="0" Source="{local:ImageResource PracaDyplomowa.Mobile.Assets.Labeling.aparat.png}" Command="{Binding ChooseImageCommand}" />
-            <ImageButton Grid.Row="1" Grid.Column="1" Source="{local:ImageResource PracaDyplomowa.Mobile.Assets.Labeling.aparat.png}" Command="{Binding ChooseImageCommand}" />
+        <StackLayout>
+            <controls:ImageGrid Command="{Binding ChooseImageCommand}" Items="{Binding BoardItems}" />
             <Label Grid.Row="2" Grid.ColumnSpan="2" FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="{Binding LabelToFind}" />
-        </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

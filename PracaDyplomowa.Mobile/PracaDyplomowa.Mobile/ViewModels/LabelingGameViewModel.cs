@@ -10,9 +10,11 @@ namespace PracaDyplomowa.Mobile.ViewModels
     {
         private readonly INavigation _navigation;
         private readonly LabelingGame _labelingGame;
+        private ICollection<LabelItem> _boardItems;
+        private string _labelToFind;
 
-        public ICollection<LabelItem> BoardItems { get; set; }
-        public string LabelToFind { get; set; }
+        public ICollection<LabelItem> BoardItems { get => _boardItems; set => _boardItems = value; }
+        public string LabelToFind { get => _labelToFind; set => _labelToFind = value; }
         public ICommand ChooseImageCommand { get; set; }
 
         public LabelingGameViewModel(INavigation navigation)
@@ -20,6 +22,11 @@ namespace PracaDyplomowa.Mobile.ViewModels
             _navigation = navigation;
             _labelingGame = new LabelingGame();
             ChooseImageCommand = new Command<LabelItem>(ChooseImage);
+
+            _boardItems = new List<LabelItem>()
+            {
+                new LabelItem {ImageUri = "PracaDyplomowa.Mobile.Assets.Labeling.aparat.png"}
+            };
         }
 
         private void ChooseImage(object obj)
@@ -29,6 +36,6 @@ namespace PracaDyplomowa.Mobile.ViewModels
                 return;
             }
         }
-        
+
     }
 }
