@@ -77,12 +77,6 @@ namespace PracaDyplomowa.Mobile.Controls
                 }
             }
 
-            grid.Children.Add(
-    new Label
-    {
-        Text = "text"
-    }, 0, 0);
-
             Content = grid;
         }
     }

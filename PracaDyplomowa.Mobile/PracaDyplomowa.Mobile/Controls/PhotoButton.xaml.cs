@@ -5,17 +5,17 @@ using Xamarin.Forms.Xaml;
 namespace PracaDyplomowa.Mobile.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ImageButton : ContentView
+    public partial class PhotoButton : ContentView
     {
         #region Properties
         public static readonly BindableProperty ImageSourceProperty =
-            BindableProperty.Create("Source", typeof(ImageSource), typeof(ImageButton), default);
+            BindableProperty.Create("Source", typeof(ImageSource), typeof(PhotoButton), default);
 
         public static readonly BindableProperty CommandProperty =
-            BindableProperty.Create("Command", typeof(ICommand), typeof(ImageButton), default);
+            BindableProperty.Create("Command", typeof(ICommand), typeof(PhotoButton), default);
 
         public static readonly BindableProperty CommandParameterProperty =
-            BindableProperty.Create("CommandParameter", typeof(object), typeof(ImageButton), default);
+            BindableProperty.Create("CommandParameter", typeof(object), typeof(PhotoButton), default);
 
         public ImageSource Source
         {
@@ -36,7 +36,7 @@ namespace PracaDyplomowa.Mobile.Controls
         }
         #endregion
 
-        public ImageButton()
+        public PhotoButton()
         {
             InitializeComponent();
         }

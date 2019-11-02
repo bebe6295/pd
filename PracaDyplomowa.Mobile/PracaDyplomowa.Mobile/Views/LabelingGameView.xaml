@@ -10,9 +10,13 @@
              NavigationPage.HasNavigationBar="False"
              x:Class="PracaDyplomowa.Mobile.Views.LabelingGameView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Grid.Row="2" Grid.ColumnSpan="2" FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="{Binding LabelToFind}" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
             <controls:ImageGrid Command="{Binding ChooseImageCommand}" Items="{Binding BoardItems}" />
-        </StackLayout>
+            <Label Grid.Row="1" FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="{Binding LabelToFind}" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

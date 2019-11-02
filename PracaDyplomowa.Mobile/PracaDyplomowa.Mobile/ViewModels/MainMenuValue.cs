@@ -5,6 +5,7 @@
         None,
         MatchingGame,
         LabelingGame,
-        ColoringGame
+        ColoringGame,
+        WritingGame
     }
 }

@@ -1,7 +1,10 @@
-﻿using PracaDyplomowa.Mobile.Logic;
+﻿using PracaDyplomowa.Mobile.Extensions;
+using PracaDyplomowa.Mobile.Logic;
 using PracaDyplomowa.Mobile.ViewModels.Base;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -22,18 +25,14 @@ namespace PracaDyplomowa.Mobile.ViewModels
         public LabelingGameViewModel(INavigation navigation)
         {
             _navigation = navigation;
+            var labelItems = GetLabelItems();
+            _labelingGame = new LabelingGame(labelItems);
+
             ChooseImageCommand = new Command<LabelItem>(ChooseImage);
-            LabelToFind = "label";
+            LabelToFind = _labelingGame.CurrentLabelItem.Label;
 
-            BoardItems = new ObservableCollection<LabelItem>(new List<LabelItem>()
-            {
-                new LabelItem {ImageUri = "PracaDyplomowa.Mobile.Assets.Labeling.aparat.png"},
-                new LabelItem {ImageUri = "PracaDyplomowa.Mobile.Assets.Labeling.aparat.png"},
-                new LabelItem {ImageUri = "PracaDyplomowa.Mobile.Assets.Labeling.aparat.png"},
-                new LabelItem {ImageUri = "PracaDyplomowa.Mobile.Assets.Labeling.aparat.png"},
-            });
+            BoardItems = new ObservableCollection<LabelItem>(_labelingGame.BoardItems);
 
-            //_labelingGame = new LabelingGame(_boardItems);
         }
 
         private void ChooseImage(LabelItem obj)
@@ -44,5 +43,15 @@ namespace PracaDyplomowa.Mobile.ViewModels
             }
         }
 
+        private IEnumerable<LabelItem> GetLabelItems()
+        {
+            var assembly = typeof(ImageResourceExtension).GetTypeInfo().Assembly;
+            return assembly.GetManifestResourceNames()
+                           .Where(x => x.StartsWith("PracaDyplomowa.Mobile.Assets.Labeling"))
+                           .Select(x => new LabelItem { 
+                            ImageUri = x,
+                            Label = x.Replace(".png", "").Split('.').Last()
+                           });
+        }
     }
 }

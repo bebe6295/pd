@@ -30,13 +30,16 @@ namespace PracaDyplomowa.Mobile.ViewModels
             switch (mainMenuItem.Value)
             {
                 case MainMenuValue.MatchingGame:
-                    await _navigation.PushAsync(new Page());
+                    await _navigation.PushAsync(new MatchingGamePage());
                     break;
                 case MainMenuValue.LabelingGame:
                     await _navigation.PushAsync(new LabelingGameView());
                     break;
                 case MainMenuValue.ColoringGame:
-                    await _navigation.PushAsync(new Page());
+                    await _navigation.PushAsync(new ColoringGamePage());
+                    break;
+                case MainMenuValue.WritingGame:
+                    await _navigation.PushAsync(new WritingGamePage());
                     break;
                 default:
                     break;
@@ -52,6 +55,7 @@ namespace PracaDyplomowa.Mobile.ViewModels
                 new MainMenuItem("Labeling", MainMenuValue.LabelingGame, command),
                 new MainMenuItem("Matching", MainMenuValue.MatchingGame, command),
                 new MainMenuItem("Coloring", MainMenuValue.ColoringGame, command),
+                new MainMenuItem("Writing", MainMenuValue.WritingGame, command),
             };
         }
     }
