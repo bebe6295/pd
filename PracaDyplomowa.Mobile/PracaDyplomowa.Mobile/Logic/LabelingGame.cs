@@ -12,8 +12,9 @@ namespace PracaDyplomowa.Mobile.Logic
         public LabelItem CurrentLabelItem { get; set; }
         public IEnumerable<LabelItem> LabeledItems { get; set; }
 
-        public LabelingGame()
+        public LabelingGame(IEnumerable<LabelItem> labeledItems)
         {
+            LabeledItems = labeledItems;
             GenerateBoard();
         }
 
@@ -44,7 +45,7 @@ namespace PracaDyplomowa.Mobile.Logic
         GameOver
     }
 
-    public class LabelItem
+    public class LabelItem : ISource
     {
         public string Label { get; set; }
         public string ImageUri { get; set; }

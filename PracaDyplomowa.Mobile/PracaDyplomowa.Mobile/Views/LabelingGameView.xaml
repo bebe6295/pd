@@ -5,13 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:PracaDyplomowa.Mobile.Extensions"
              xmlns:controls="clr-namespace:PracaDyplomowa.Mobile.Controls"
+             xmlns:vm="clr-namespace:PracaDyplomowa.Mobile.ViewModels"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="False"
              x:Class="PracaDyplomowa.Mobile.Views.LabelingGameView">
     <ContentPage.Content>
         <StackLayout>
-            <controls:ImageGrid Command="{Binding ChooseImageCommand}" Items="{Binding BoardItems}" />
             <Label Grid.Row="2" Grid.ColumnSpan="2" FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="{Binding LabelToFind}" />
+            <controls:ImageGrid Command="{Binding ChooseImageCommand}" Items="{Binding BoardItems}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

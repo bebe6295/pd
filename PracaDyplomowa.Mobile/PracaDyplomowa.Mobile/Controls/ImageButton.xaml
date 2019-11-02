@@ -5,9 +5,5 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="PracaDyplomowa.Mobile.Controls.ImageButton">
-  <ContentView.Content>
-      <StackLayout>
-            <Button Text="Image"  />
-        </StackLayout>
-  </ContentView.Content>
+
 </ContentView>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PracaDyplomowa.Mobile.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace PracaDyplomowa.Mobile.Views
         public LabelingGameView()
         {
             InitializeComponent();
+            BindingContext = new LabelingGameViewModel(Navigation);
         }
     }
 }

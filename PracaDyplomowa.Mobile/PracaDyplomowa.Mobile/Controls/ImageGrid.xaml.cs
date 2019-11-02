@@ -1,6 +1,9 @@
 ﻿using PracaDyplomowa.Mobile.Extensions;
 using PracaDyplomowa.Mobile.Logic;
+using PracaDyplomowa.Mobile.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Input;
@@ -13,18 +16,20 @@ namespace PracaDyplomowa.Mobile.Controls
     public partial class ImageGrid : ContentView
     {
         public static readonly BindableProperty ItemsProperty =
-            BindableProperty.Create("Items", typeof(ICollection<ISource>), typeof(ImageGrid), default,
-                propertyChanged: (bindable, oldValue, newValue) => { ((ImageGrid)bindable).GenerateGrid(newValue as ICollection<ISource>); });
+            BindableProperty.Create(nameof(Items), typeof(ObservableCollection<LabelItem>), typeof(ImageGrid), new ObservableCollection<LabelItem>(),
+                propertyChanged: (bindable, oldValue, newValue) => { 
+                    ((ImageGrid)bindable).GenerateGrid(newValue as IEnumerable<ISource>); 
+                });
 
         public static readonly BindableProperty CommandProperty =
-            BindableProperty.Create("Command", typeof(ICommand), typeof(ImageGrid), default);
+            BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(ImageGrid), default,
+                propertyChanged: (bindable, oldValue, newValue) => {
+                    ((ImageGrid)bindable).GenerateGrid(((ImageGrid)bindable).Items); 
+            });
 
-        public static readonly BindableProperty CommandParameterProperty =
-            BindableProperty.Create("CommandParameter", typeof(object), typeof(ImageGrid), default);
-
-        public ICollection<ISource> Items
+        public ObservableCollection<LabelItem> Items
         {
-            get => (ICollection<ISource>)GetValue(ItemsProperty);
+            get => (ObservableCollection<LabelItem>)GetValue(ItemsProperty);
             set => SetValue(ItemsProperty, value);
         }
 
@@ -39,9 +44,9 @@ namespace PracaDyplomowa.Mobile.Controls
             InitializeComponent();
         }
 
-        private void GenerateGrid(ICollection<ISource> items)
+        private void GenerateGrid(IEnumerable<ISource> items)
         {
-            if (items == null)
+            if (items == null || !items.Any())
             {
                 return;
             }
@@ -71,6 +76,12 @@ namespace PracaDyplomowa.Mobile.Controls
                         }, column, row); ;
                 }
             }
+
+            grid.Children.Add(
+    new Label
+    {
+        Text = "text"
+    }, 0, 0);
 
             Content = grid;
         }
