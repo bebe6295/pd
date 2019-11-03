@@ -1,4 +1,5 @@
-﻿using SkiaSharp;
+﻿using PracaDyplomowa.Mobile.TouchTracking;
+using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
@@ -30,78 +31,63 @@ namespace PracaDyplomowa.Mobile.Views
             InitializeComponent();
         }
 
-        void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        void OnTouchEffectAction(object sender, TouchActionEventArgs args)
         {
-            SKImageInfo info = args.Info;
-            SKSurface surface = args.Surface;
-            SKCanvas canvas = surface.Canvas;
-
-            // Create bitmap the size of the display surface
-            if (saveBitmap == null)
+            switch (args.Type)
             {
-                saveBitmap = new SKBitmap(info.Width, info.Height);
+                case TouchActionType.Pressed:
+                    if (!inProgressPaths.ContainsKey(args.Id))
+                    {
+                        SKPath path = new SKPath();
+                        path.MoveTo(ConvertToPixel(args.Location));
+                        inProgressPaths.Add(args.Id, path);
+                        canvasView.InvalidateSurface();
+                    }
+                    break;
+
+                case TouchActionType.Moved:
+                    if (inProgressPaths.ContainsKey(args.Id))
+                    {
+                        SKPath path = inProgressPaths[args.Id];
+                        path.LineTo(ConvertToPixel(args.Location));
+                        canvasView.InvalidateSurface();
+                    }
+                    break;
+
+                case TouchActionType.Released:
+                    if (inProgressPaths.ContainsKey(args.Id))
+                    {
+                        completedPaths.Add(inProgressPaths[args.Id]);
+                        inProgressPaths.Remove(args.Id);
+                        canvasView.InvalidateSurface();
+                    }
+                    break;
+
+                case TouchActionType.Cancelled:
+                    if (inProgressPaths.ContainsKey(args.Id))
+                    {
+                        inProgressPaths.Remove(args.Id);
+                        canvasView.InvalidateSurface();
+                    }
+                    break;
             }
-            // Or create new bitmap for a new size of display surface
-            else if (saveBitmap.Width < info.Width || saveBitmap.Height < info.Height)
-            {
-                SKBitmap newBitmap = new SKBitmap(Math.Max(saveBitmap.Width, info.Width),
-                                                  Math.Max(saveBitmap.Height, info.Height));
-
-                using (SKCanvas newCanvas = new SKCanvas(newBitmap))
-                {
-                    newCanvas.Clear();
-                    newCanvas.DrawBitmap(saveBitmap, 0, 0);
-                }
-
-                saveBitmap = newBitmap;
-            }
-
-            // Render the bitmap
-            canvas.Clear();
-            canvas.DrawBitmap(saveBitmap, 0, 0);
         }
 
-        //void OnTouchEffectAction(object sender, TouchActionEventArgs args)
-        //{
-        //    switch (args.Type)
-        //    {
-        //        case TouchActionType.Pressed:
-        //            if (!inProgressPaths.ContainsKey(args.Id))
-        //            {
-        //                SKPath path = new SKPath();
-        //                path.MoveTo(ConvertToPixel(args.Location));
-        //                inProgressPaths.Add(args.Id, path);
-        //                UpdateBitmap();
-        //            }
-        //            break;
+        void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        {
+            SKCanvas canvas = args.Surface.Canvas;
+            canvas.Clear();
 
-        //        case TouchActionType.Moved:
-        //            if (inProgressPaths.ContainsKey(args.Id))
-        //            {
-        //                SKPath path = inProgressPaths[args.Id];
-        //                path.LineTo(ConvertToPixel(args.Location));
-        //                UpdateBitmap();
-        //            }
-        //            break;
+            foreach (SKPath path in completedPaths)
+            {
+                canvas.DrawPath(path, paint);
+            }
 
-        //        case TouchActionType.Released:
-        //            if (inProgressPaths.ContainsKey(args.Id))
-        //            {
-        //                completedPaths.Add(inProgressPaths[args.Id]);
-        //                inProgressPaths.Remove(args.Id);
-        //                UpdateBitmap();
-        //            }
-        //            break;
-
-        //        case TouchActionType.Cancelled:
-        //            if (inProgressPaths.ContainsKey(args.Id))
-        //            {
-        //                inProgressPaths.Remove(args.Id);
-        //                UpdateBitmap();
-        //            }
-        //            break;
-        //    }
-        //}
+            foreach (SKPath path in inProgressPaths.Values)
+            {
+                canvas.DrawPath(path, paint);
+            }
+        }
 
         SKPoint ConvertToPixel(Point pt)
         {
@@ -109,25 +95,5 @@ namespace PracaDyplomowa.Mobile.Views
                                (float)(canvasView.CanvasSize.Height * pt.Y / canvasView.Height));
         }
 
-        void UpdateBitmap()
-        {
-            using (SKCanvas saveBitmapCanvas = new SKCanvas(saveBitmap))
-            {
-                saveBitmapCanvas.Clear();
-
-                foreach (SKPath path in completedPaths)
-                {
-                    saveBitmapCanvas.DrawPath(path, paint);
-                }
-
-                foreach (SKPath path in inProgressPaths.Values)
-                {
-                    saveBitmapCanvas.DrawPath(path, paint);
-                }
-            }
-
-            canvasView.InvalidateSurface();
-        }
-
-        }
+    }
 }
