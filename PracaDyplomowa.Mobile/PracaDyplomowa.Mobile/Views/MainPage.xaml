@@ -9,14 +9,6 @@
              NavigationPage.HasNavigationBar="False"
              x:Class="PracaDyplomowa.Mobile.MainPage">
 
-    <controls:MenuItemsGrid MenuItems="{Binding MenuItems}" />
-
-    <!--<StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BindableLayout.ItemsSource="{Binding MenuItems}">
-        <BindableLayout.ItemTemplate>
-            <DataTemplate>
-                    <Button Text="{Binding Label}" Command="{Binding OnClickCommand}" CommandParameter="{Binding}"/>
-            </DataTemplate>
-        </BindableLayout.ItemTemplate>
-    </StackLayout>-->
+        <controls:MenuItemsGrid MenuItems="{Binding MenuItems}" />
 
 </ContentPage>

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using PracaDyplomowa.Mobile.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace PracaDyplomowa.Mobile.Views
@@ -9,6 +10,7 @@ namespace PracaDyplomowa.Mobile.Views
         public ColoringGamePage()
         {
             InitializeComponent();
+            BindingContext = new ColorsGameViewModel(Navigation);
         }
     }
 }

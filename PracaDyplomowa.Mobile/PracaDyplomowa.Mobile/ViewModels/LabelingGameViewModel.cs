@@ -1,5 +1,6 @@
 ﻿using PracaDyplomowa.Mobile.Extensions;
 using PracaDyplomowa.Mobile.Logic;
+using PracaDyplomowa.Mobile.Services;
 using PracaDyplomowa.Mobile.ViewModels.Base;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,9 +15,10 @@ namespace PracaDyplomowa.Mobile.ViewModels
     public class LabelingGameViewModel : ViewModelBase
     {
         private readonly INavigation _navigation;
-        private readonly LabelingGame _labelingGame;
+        private readonly LabelGame _labelingGame;
         private ObservableCollection<LabelItem> _boardItems;
         private string _labelToFind;
+        private IGameItemsProvider<LabelItem> _labelItemsProvider;
 
         public ObservableCollection<LabelItem> BoardItems { get => _boardItems; set => SetField(ref _boardItems, value); }
         public string LabelToFind { get => _labelToFind; set => SetField(ref _labelToFind, value); }
@@ -25,33 +27,26 @@ namespace PracaDyplomowa.Mobile.ViewModels
         public LabelingGameViewModel(INavigation navigation)
         {
             _navigation = navigation;
-            var labelItems = GetLabelItems();
-            _labelingGame = new LabelingGame(labelItems);
+            _labelItemsProvider = new LabelItemsProvider();
+            _labelingGame = new LabelGame(_labelItemsProvider.GetGameItems());
 
             ChooseImageCommand = new Command<LabelItem>(ChooseImage);
             LabelToFind = _labelingGame.CurrentLabelItem.Label;
-
             BoardItems = new ObservableCollection<LabelItem>(_labelingGame.BoardItems);
-
         }
 
-        private void ChooseImage(LabelItem obj)
+        private void ChooseImage(LabelItem labelItem)
         {
-            if (obj == null)
+            if (labelItem == null)
             {
                 return;
             }
-        }
 
-        private IEnumerable<LabelItem> GetLabelItems()
-        {
-            var assembly = typeof(ImageResourceExtension).GetTypeInfo().Assembly;
-            return assembly.GetManifestResourceNames()
-                           .Where(x => x.StartsWith("PracaDyplomowa.Mobile.Assets.Labeling"))
-                           .Select(x => new LabelItem { 
-                            ImageUri = x,
-                            Label = x.Replace(".png", "").Split('.').Last()
-                           });
+            if(_labelingGame.MakeChoice(labelItem))
+            {
+                BoardItems = new ObservableCollection<LabelItem>(_labelingGame.BoardItems);
+                LabelToFind = _labelingGame.CurrentLabelItem.Label;
+            }
         }
     }
 }

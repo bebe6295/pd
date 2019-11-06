@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace PracaDyplomowa.Mobile.Logic
 {
-    public class LabelingGame
+    public class LabelGame
     {
         public GameState State { get; private set; }
         public ICollection<LabelItem> BoardItems { get; set; }
         public LabelItem CurrentLabelItem { get; set; }
         public IEnumerable<LabelItem> LabeledItems { get; set; }
 
-        public LabelingGame(IEnumerable<LabelItem> labeledItems)
+        public LabelGame(IEnumerable<LabelItem> labeledItems)
         {
             LabeledItems = labeledItems;
             GenerateBoard();
@@ -21,7 +21,7 @@ namespace PracaDyplomowa.Mobile.Logic
         public void GenerateBoard()
         {
             BoardItems = LabeledItems.OrderBy(x => Guid.NewGuid()).Take(4).ToList();
-            CurrentLabelItem = BoardItems.First();
+            CurrentLabelItem = BoardItems.OrderBy(x => Guid.NewGuid()).First();
         }
 
         public bool MakeChoice(LabelItem labelItem)
@@ -43,11 +43,5 @@ namespace PracaDyplomowa.Mobile.Logic
         Initialize,
         InProgress,
         GameOver
-    }
-
-    public class LabelItem : ISource
-    {
-        public string Label { get; set; }
-        public string ImageUri { get; set; }
     }
 }

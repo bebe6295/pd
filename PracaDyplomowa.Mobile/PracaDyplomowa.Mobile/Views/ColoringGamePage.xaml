@@ -3,14 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:PracaDyplomowa.Mobile.Controls"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="False"
              x:Class="PracaDyplomowa.Mobile.Views.ColoringGamePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <controls:ImageGrid Command="{Binding ChooseImageCommand}" Items="{Binding BoardItems}" />
+            <Label Grid.Row="1" FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="{Binding LabelToFind}" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
