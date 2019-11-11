@@ -7,30 +7,30 @@ using Xamarin.Forms;
 
 namespace PracaDyplomowa.Mobile.ViewModels
 {
-    public class ChooseGameViewModel<T> : ViewModelBase where T : class, ISource
+    public class ChooseGameViewModel : ViewModelBase
     {
         private readonly INavigation _navigation;
-        private readonly ChooseGame<T> _chooseGame;
-        private ObservableCollection<T> _boardItems;
+        private readonly ChooseGame<Source> _chooseGame;
+        private ObservableCollection<Source> _boardItems;
         private string _labelToFind;
-        private IGameItemsProvider<T> _itemProvider;
+        private IGameItemsProvider<Source> _itemProvider;
 
         public ICommand ChooseImageCommand { get; set; }
         public string LabelToFind { get => _labelToFind; set => SetField(ref _labelToFind, value); }
-        public ObservableCollection<T> BoardItems { get => _boardItems; set => SetField(ref _boardItems, value); }
+        public ObservableCollection<Source> BoardItems { get => _boardItems; set => SetField(ref _boardItems, value); }
 
-        public ChooseGameViewModel(INavigation navigation, IGameItemsProvider<T> itemProvider)
+        public ChooseGameViewModel(INavigation navigation, IGameItemsProvider<Source> itemProvider)
         {
             _navigation = navigation;
             _itemProvider = itemProvider;
-            _chooseGame = new ChooseGame<T>(_itemProvider.GetGameItems());
+            _chooseGame = new ChooseGame<Source>(_itemProvider.GetGameItems());
 
             LabelToFind = _chooseGame.CurrentItem.Label;
-            ChooseImageCommand = new Command<T>(ChooseImage);
-            BoardItems = new ObservableCollection<T>(_chooseGame.BoardItems);
+            ChooseImageCommand = new Command<Source>(ChooseImage);
+            BoardItems = new ObservableCollection<Source>(_chooseGame.BoardItems);
         }
 
-        private void ChooseImage(T item)
+        private void ChooseImage(Source item)
         {
             if (item == null)
             {
@@ -39,7 +39,7 @@ namespace PracaDyplomowa.Mobile.ViewModels
 
             if (_chooseGame.MakeChoice(item))
             {
-                BoardItems = new ObservableCollection<T>(_chooseGame.BoardItems);
+                BoardItems = new ObservableCollection<Source>(_chooseGame.BoardItems);
                 LabelToFind = _chooseGame.CurrentItem.Label;
             }
         }

@@ -6,14 +6,14 @@ using PracaDyplomowa.Mobile.Logic;
 
 namespace PracaDyplomowa.Mobile.Services
 {
-    public class BorderItemProvider : IGameItemsProvider<BorderItem>
+    public class BorderItemProvider : IGameItemsProvider<Source>
     {
-        public IEnumerable<BorderItem> GetGameItems()
+        public IEnumerable<Source> GetGameItems()
         {
             var assembly = typeof(ImageResourceExtension).GetTypeInfo().Assembly;
             return assembly.GetManifestResourceNames()
                            .Where(x => x.StartsWith("PracaDyplomowa.Mobile.Assets.Border"))
-                           .Select(x => new BorderItem
+                           .Select(x => new Source
                            {
                                ImageUri = x,
                                Label = x.Split('.').Reverse().Skip(1).First()
@@ -21,14 +21,14 @@ namespace PracaDyplomowa.Mobile.Services
         }
     }
 
-    public class ItemProvider : IGameItemsProvider<FigureItem>
+    public class ItemProvider : IGameItemsProvider<Source>
     {
-        public IEnumerable<FigureItem> GetGameItems()
+        public IEnumerable<Source> GetGameItems()
         {
             var assembly = typeof(ImageResourceExtension).GetTypeInfo().Assembly;
             return assembly.GetManifestResourceNames()
                            .Where(x => x.StartsWith("PracaDyplomowa.Mobile.Assets.Fugure"))
-                           .Select(x => new FigureItem
+                           .Select(x => new Source
                            {
                                ImageUri = x,
                                Label = x.Split('.').Reverse().Skip(1).First()

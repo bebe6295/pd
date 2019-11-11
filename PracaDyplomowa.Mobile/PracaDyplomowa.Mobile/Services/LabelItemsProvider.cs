@@ -6,14 +6,14 @@ using PracaDyplomowa.Mobile.Logic;
 
 namespace PracaDyplomowa.Mobile.Services
 {
-    public class LabelItemsProvider : IGameItemsProvider<LabelItem>
+    public class LabelItemsProvider : IGameItemsProvider<Source>
     {
-        public IEnumerable<LabelItem> GetGameItems()
+        public IEnumerable<Source> GetGameItems()
         {
             var assembly = typeof(ImageResourceExtension).GetTypeInfo().Assembly;
             return assembly.GetManifestResourceNames()
                            .Where(x => x.StartsWith("PracaDyplomowa.Mobile.Assets.Labeling"))
-                           .Select(x => new LabelItem
+                           .Select(x => new Source
                            {
                                ImageUri = x,
                                Label = x.Split('.').Reverse().Skip(1).First()

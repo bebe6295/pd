@@ -14,7 +14,7 @@ namespace PracaDyplomowa.Mobile.Controls
     public partial class ImageGrid : ContentView
     {
         public static readonly BindableProperty ItemsProperty =
-            BindableProperty.Create(nameof(Items), typeof(ObservableCollection<LabelItem>), typeof(ImageGrid), new ObservableCollection<LabelItem>(),
+            BindableProperty.Create(nameof(Items), typeof(ObservableCollection<Source>), typeof(ImageGrid), new ObservableCollection<Source>(),
                 propertyChanged: (bindable, oldValue, newValue) =>
                 {
                     ((ImageGrid)bindable).GenerateGrid(newValue as IEnumerable<ISource>);
@@ -27,9 +27,9 @@ namespace PracaDyplomowa.Mobile.Controls
                     ((ImageGrid)bindable).GenerateGrid(((ImageGrid)bindable).Items);
                 });
 
-        public ObservableCollection<LabelItem> Items
+        public ObservableCollection<Source> Items
         {
-            get => (ObservableCollection<LabelItem>)GetValue(ItemsProperty);
+            get => (ObservableCollection<Source>)GetValue(ItemsProperty);
             set => SetValue(ItemsProperty, value);
         }
 
