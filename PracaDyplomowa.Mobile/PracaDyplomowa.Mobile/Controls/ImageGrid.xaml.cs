@@ -1,7 +1,5 @@
 ﻿using PracaDyplomowa.Mobile.Extensions;
 using PracaDyplomowa.Mobile.Logic;
-using PracaDyplomowa.Mobile.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -17,15 +15,17 @@ namespace PracaDyplomowa.Mobile.Controls
     {
         public static readonly BindableProperty ItemsProperty =
             BindableProperty.Create(nameof(Items), typeof(ObservableCollection<LabelItem>), typeof(ImageGrid), new ObservableCollection<LabelItem>(),
-                propertyChanged: (bindable, oldValue, newValue) => { 
-                    ((ImageGrid)bindable).GenerateGrid(newValue as IEnumerable<ISource>); 
+                propertyChanged: (bindable, oldValue, newValue) =>
+                {
+                    ((ImageGrid)bindable).GenerateGrid(newValue as IEnumerable<ISource>);
                 });
 
         public static readonly BindableProperty CommandProperty =
             BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(ImageGrid), default,
-                propertyChanged: (bindable, oldValue, newValue) => {
-                    ((ImageGrid)bindable).GenerateGrid(((ImageGrid)bindable).Items); 
-            });
+                propertyChanged: (bindable, oldValue, newValue) =>
+                {
+                    ((ImageGrid)bindable).GenerateGrid(((ImageGrid)bindable).Items);
+                });
 
         public ObservableCollection<LabelItem> Items
         {

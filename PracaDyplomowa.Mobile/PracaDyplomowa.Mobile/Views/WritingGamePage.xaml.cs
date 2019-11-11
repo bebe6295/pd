@@ -24,8 +24,6 @@ namespace PracaDyplomowa.Mobile.Views
             StrokeJoin = SKStrokeJoin.Round
         };
 
-        SKBitmap saveBitmap;
-
         public WritingGamePage()
         {
             InitializeComponent();

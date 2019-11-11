@@ -35,7 +35,6 @@ namespace PracaDyplomowa.Mobile.Logic
 
             return true;
         }
-
     }
 
     public enum GameState
