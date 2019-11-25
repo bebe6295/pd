@@ -8,7 +8,6 @@ namespace PracaDyplomowa.Mobile.ViewModels
     {
         public WritingGameViewModel()
         {
-
         }
 
     }

@@ -9,7 +9,7 @@
              NavigationPage.HasNavigationBar="False"
              x:Class="PracaDyplomowa.Mobile.Views.WritingGamePage">
     <Grid BackgroundColor="White">
-        <skia:SKCanvasView x:Name="canvasView"
+        <skia:SKCanvasView x:Name="canvasView" 
                            PaintSurface="OnCanvasViewPaintSurface" />
         <Grid.Effects>
             <tt:TouchEffect Capture="True"

@@ -345,6 +345,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="RestSharp" Version="106.6.10" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
@@ -352,6 +353,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Controls\ImageGrid.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\MatchGrid.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\MenuItemsGrid.xaml">
@@ -363,7 +367,7 @@
     <EmbeddedResource Update="Views\LabelingGameView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MatchingGamePage.xaml">
+    <EmbeddedResource Update="Views\MatchGamePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\WritingGamePage.xaml">
@@ -376,33 +380,33 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\Matching\Border\auto.png" />
-    <Resource Include="Assets\Matching\Border\delfin.png" />
-    <Resource Include="Assets\Matching\Border\drzewo.png" />
-    <Resource Include="Assets\Matching\Border\dzik.png" />
-    <Resource Include="Assets\Matching\Border\elipsa.png" />
-    <Resource Include="Assets\Matching\Border\foka.png" />
-    <Resource Include="Assets\Matching\Border\gwiazda.png" />
-    <Resource Include="Assets\Matching\Border\klucz.png" />
-    <Resource Include="Assets\Matching\Border\kot.png" />
-    <Resource Include="Assets\Matching\Border\królik.png" />
-    <Resource Include="Assets\Matching\Border\ksi®zyc.png" />
-    <Resource Include="Assets\Matching\Border\kwadrat.png" />
-    <Resource Include="Assets\Matching\Border\kwiato.png" />
-    <Resource Include="Assets\Matching\Border\liÿå.png" />
-    <Resource Include="Assets\Matching\Border\maêpa.png" />
-    <Resource Include="Assets\Matching\Border\miÿ.png" />
-    <Resource Include="Assets\Matching\Border\nuta.png" />
-    <Resource Include="Assets\Matching\Border\pies.png" />
-    <Resource Include="Assets\Matching\Border\pi®ciokÑt.png" />
-    <Resource Include="Assets\Matching\Border\rower.png" />
-    <Resource Include="Assets\Matching\Border\serce.png" />
-    <Resource Include="Assets\Matching\Border\szynszyl.png" />
-    <Resource Include="Assets\Matching\Border\sêoõ.png" />
-    <Resource Include="Assets\Matching\Border\wiewiórka.png" />
-    <Resource Include="Assets\Matching\Border\zamek.png" />
-    <Resource Include="Assets\Matching\Border\zaokraglonyprostokÑt.png" />
-    <Resource Include="Assets\Matching\Border\êopata.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\auto.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\delfin.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\drzewo.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\dzik.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\elipsa.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\foka.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\gwiazda.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\klucz.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\kot.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\królik.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\ksi®zyc.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\kwadrat.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\kwiato.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\liÿå.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\maêpa.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\miÿ.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\nuta.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\pies.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\pi®ciokÑt.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\rower.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\serce.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\szynszyl.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\sêoõ.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\wiewiórka.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\zamek.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\zaokraglonyprostokÑt.png" />
+    <EmbeddedResource Include="Assets\Matching\Border\êopata.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -30,7 +30,7 @@ namespace PracaDyplomowa.Mobile.ViewModels
             switch (mainMenuItem.Value)
             {
                 case MainMenuValue.MatchingGame:
-                    await _navigation.PushAsync(new MatchingGamePage());
+                    await _navigation.PushAsync(new MatchGamePage());
                     break;
                 case MainMenuValue.LabelingGame:
                     await _navigation.PushAsync(new LabelingGameView());

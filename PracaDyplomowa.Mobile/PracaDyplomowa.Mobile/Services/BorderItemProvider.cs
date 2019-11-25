@@ -12,7 +12,7 @@ namespace PracaDyplomowa.Mobile.Services
         {
             var assembly = typeof(ImageResourceExtension).GetTypeInfo().Assembly;
             return assembly.GetManifestResourceNames()
-                           .Where(x => x.StartsWith("PracaDyplomowa.Mobile.Assets.Border"))
+                           .Where(x => x.StartsWith("PracaDyplomowa.Mobile.Assets.Matching.Border"))
                            .Select(x => new Source
                            {
                                ImageUri = x,
@@ -21,13 +21,13 @@ namespace PracaDyplomowa.Mobile.Services
         }
     }
 
-    public class ItemProvider : IGameItemsProvider<Source>
+    public class FigureItemProvider : IGameItemsProvider<Source>
     {
         public IEnumerable<Source> GetGameItems()
         {
             var assembly = typeof(ImageResourceExtension).GetTypeInfo().Assembly;
             return assembly.GetManifestResourceNames()
-                           .Where(x => x.StartsWith("PracaDyplomowa.Mobile.Assets.Fugure"))
+                           .Where(x => x.StartsWith("PracaDyplomowa.Mobile.Assets.Matching.Figure"))
                            .Select(x => new Source
                            {
                                ImageUri = x,

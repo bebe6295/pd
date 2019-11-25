@@ -74,6 +74,8 @@ namespace PracaDyplomowa.Mobile.Views
         void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
             SKCanvas canvas = args.Surface.Canvas;
+
+            //args.Surface.Snapshot().ToShader().;
             canvas.Clear();
 
             foreach (SKPath path in completedPaths)

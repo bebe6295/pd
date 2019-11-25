@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using PracaDyplomowa.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace PracaDyplomowa.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MatchingGamePage : ContentPage
+    public partial class MatchGamePage : ContentPage
     {
-        public MatchingGamePage()
+        public MatchGamePage()
         {
             InitializeComponent();
+            BindingContext = new MatchGameViewModel();
         }
     }
 }
