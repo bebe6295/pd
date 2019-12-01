@@ -5,12 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              xmlns:tt="clr-namespace:PracaDyplomowa.Mobile.TouchTracking"
+             xmlns:ext="clr-namespace:PracaDyplomowa.Mobile.Extensions"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="False"
              x:Class="PracaDyplomowa.Mobile.Views.WritingGamePage">
     <Grid BackgroundColor="White">
+        <Image Source="{ext:ImageResource PracaDyplomowa.Mobile.Assets.Letters.Large.S.jpg}" Margin="50"/>
         <skia:SKCanvasView x:Name="canvasView" 
-                           PaintSurface="OnCanvasViewPaintSurface" />
+                           PaintSurface="OnCanvasViewPaintSurface">
+        </skia:SKCanvasView>
         <Grid.Effects>
             <tt:TouchEffect Capture="True"
                             TouchAction="OnTouchEffectAction" />

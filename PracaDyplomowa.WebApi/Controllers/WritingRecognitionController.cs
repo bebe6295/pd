@@ -3,17 +3,18 @@ using System.Drawing;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace PracaDyplomowa.WebApi.Controllers
 {
     public class WritingRecognitionController : ApiController
     {
-        private readonly IOcrReader ocrRead;
+        private readonly IOcrReader _ocrRead;
 
         public WritingRecognitionController()
         {
-            this.ocrRead = new OcrReader();
+            _ocrRead = new TesseractOcrReader(HttpContext.Current.Server.MapPath(@"~/tessdata"));
         }
 
         public async Task<string> CheckWriting()
@@ -26,11 +27,8 @@ namespace PracaDyplomowa.WebApi.Controllers
             foreach (var file in provider.Contents)
             {
                 var filename = file.Headers.ContentDisposition.FileName.Trim('\"');
-                //var buffer = await file.ReadAsByteArrayAsync();
-                var bitmap = new Bitmap(await file.ReadAsStreamAsync());
-                //new Bitmap(buffer);
-                var result = ocrRead.GetLetter(bitmap);
-                //Do whatever you want with filename and its binary data.
+                var stream = await file.ReadAsStreamAsync();
+                var result = _ocrRead.GetLetter(stream);
                 return result;
             }
 

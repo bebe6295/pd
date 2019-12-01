@@ -41,6 +41,9 @@ namespace PracaDyplomowa.Mobile.ViewModels
                 case MainMenuValue.WritingGame:
                     await _navigation.PushAsync(new WritingGamePage());
                     break;
+                case MainMenuValue.DrawingGame:
+                    await _navigation.PushAsync(new DrawingGamePage());
+                    break;
                 default:
                     break;
             }
@@ -52,10 +55,11 @@ namespace PracaDyplomowa.Mobile.ViewModels
 
             return new List<MainMenuItem>
             {
-                new MainMenuItem("Labeling", MainMenuValue.LabelingGame, command),
-                new MainMenuItem("Matching", MainMenuValue.MatchingGame, command),
-                new MainMenuItem("Coloring", MainMenuValue.ColoringGame, command),
-                new MainMenuItem("Writing", MainMenuValue.WritingGame, command),
+                new MainMenuItem("Etykietowanie", MainMenuValue.LabelingGame, command),
+                new MainMenuItem("Dopasowywanie", MainMenuValue.MatchingGame, command),
+                new MainMenuItem("Kolory", MainMenuValue.ColoringGame, command),
+                new MainMenuItem("Motoryka mała", MainMenuValue.WritingGame, command),
+                new MainMenuItem("Rysowanie", MainMenuValue.DrawingGame, command),
             };
         }
     }

@@ -6,6 +6,7 @@
         MatchingGame,
         LabelingGame,
         ColoringGame,
-        WritingGame
+        WritingGame,
+        DrawingGame
     }
 }

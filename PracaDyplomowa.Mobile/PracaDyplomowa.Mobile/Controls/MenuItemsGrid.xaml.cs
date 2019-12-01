@@ -31,9 +31,9 @@ namespace PracaDyplomowa.Mobile.Controls
             }
 
             var grid = new Grid();
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.3, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.5, GridUnitType.Star) });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.3, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.5, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0.5, GridUnitType.Star) });
 
             var items = menuItems.ToArray();
@@ -42,7 +42,9 @@ namespace PracaDyplomowa.Mobile.Controls
             {
                 grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
                 var menuItem = items[row];
-                var button = new Button { Text = menuItem.Label, Command = menuItem.OnClickCommand, CommandParameter = menuItem, Padding = 64 };
+                var button = new Button { Text = menuItem.Label, Command = menuItem.OnClickCommand, CommandParameter = menuItem, Margin = 12 };
+                button.BackgroundColor = Color.LightGray;
+                button.FontSize = 24;
                 grid.Children.Add(button, 1, row + 1);
             }
 

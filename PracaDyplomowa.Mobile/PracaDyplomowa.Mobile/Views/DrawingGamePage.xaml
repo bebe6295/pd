@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:tt="clr-namespace:PracaDyplomowa.Mobile.TouchTracking"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="PracaDyplomowa.Mobile.Views.DrawingGamePage">
+    <ContentPage.Content>
+        <Grid BackgroundColor="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="64" />
+            </Grid.ColumnDefinitions>
+            <Grid.Effects>
+                <tt:TouchEffect Capture="True"
+                            TouchAction="OnTouchEffectAction" />
+            </Grid.Effects>
+
+            <skia:SKCanvasView x:Name="canvasView" 
+                           PaintSurface="OnCanvasViewPaintSurface" />
+            <StackLayout Grid.Column="1" VerticalOptions="Center">
+                <Button HeightRequest="64" BackgroundColor="Red" />
+                <Button HeightRequest="64" BackgroundColor="Blue" />
+                <Button HeightRequest="64" BackgroundColor="Green" />
+                <Button HeightRequest="64" BackgroundColor="Black" />
+                <Button HeightRequest="64" BackgroundColor="Orange" />
+                <Button HeightRequest="64" BackgroundColor="Violet" />
+                <Button HeightRequest="64" BackgroundColor="Yellow" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
