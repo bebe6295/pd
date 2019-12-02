@@ -22,13 +22,13 @@
             <skia:SKCanvasView x:Name="canvasView" 
                            PaintSurface="OnCanvasViewPaintSurface" />
             <StackLayout Grid.Column="1" VerticalOptions="Center">
-                <Button HeightRequest="64" BackgroundColor="Red" />
-                <Button HeightRequest="64" BackgroundColor="Blue" />
-                <Button HeightRequest="64" BackgroundColor="Green" />
-                <Button HeightRequest="64" BackgroundColor="Black" />
-                <Button HeightRequest="64" BackgroundColor="Orange" />
-                <Button HeightRequest="64" BackgroundColor="Violet" />
-                <Button HeightRequest="64" BackgroundColor="Yellow" />
+                <Button HeightRequest="64" BackgroundColor="Red" Clicked="Button_Clicked" />
+                <Button HeightRequest="64" BackgroundColor="Blue" Clicked="Button_Clicked" />
+                <Button HeightRequest="64" BackgroundColor="Green" Clicked="Button_Clicked" />
+                <Button HeightRequest="64" BackgroundColor="Black" Clicked="Button_Clicked" />
+                <Button HeightRequest="64" BackgroundColor="Orange" Clicked="Button_Clicked" />
+                <Button HeightRequest="64" BackgroundColor="Violet" Clicked="Button_Clicked" />
+                <Button HeightRequest="64" BackgroundColor="Yellow" Clicked="Button_Clicked" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

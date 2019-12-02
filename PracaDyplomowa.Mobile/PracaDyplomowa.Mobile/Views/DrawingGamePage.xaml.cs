@@ -11,8 +11,14 @@ namespace PracaDyplomowa.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DrawingGamePage : ContentPage
     {
-        Dictionary<long, SKPath> inProgressPaths = new Dictionary<long, SKPath>();
-        List<SKPath> completedPaths = new List<SKPath>();
+        class Draw
+        {
+            public SKPaint Paint { get; set; }
+            public SKPath SKPath { get; set; }
+        }
+
+        Dictionary<long, Draw> inProgressPaths = new Dictionary<long, Draw>();
+        List<Draw> completedPaths = new List<Draw>();
 
         SKPaint paint = new SKPaint
         {
@@ -22,6 +28,7 @@ namespace PracaDyplomowa.Mobile.Views
             StrokeCap = SKStrokeCap.Round,
             StrokeJoin = SKStrokeJoin.Round
         };
+
         public DrawingGamePage()
         {
             InitializeComponent();
@@ -36,7 +43,7 @@ namespace PracaDyplomowa.Mobile.Views
                     {
                         SKPath path = new SKPath();
                         path.MoveTo(ConvertToPixel(args.Location));
-                        inProgressPaths.Add(args.Id, path);
+                        inProgressPaths.Add(args.Id, new Draw { SKPath = path, Paint = paint.Clone() });
                         canvasView.InvalidateSurface();
                     }
                     break;
@@ -44,7 +51,7 @@ namespace PracaDyplomowa.Mobile.Views
                 case TouchActionType.Moved:
                     if (inProgressPaths.ContainsKey(args.Id))
                     {
-                        SKPath path = inProgressPaths[args.Id];
+                        SKPath path = inProgressPaths[args.Id].SKPath;
                         path.LineTo(ConvertToPixel(args.Location));
                         canvasView.InvalidateSurface();
                     }
@@ -76,14 +83,14 @@ namespace PracaDyplomowa.Mobile.Views
             //args.Surface.Snapshot().ToShader().;
             canvas.Clear();
 
-            foreach (SKPath path in completedPaths)
+            foreach (var draw in completedPaths)
             {
-                canvas.DrawPath(path, paint);
+                canvas.DrawPath(draw.SKPath, draw.Paint);
             }
 
-            foreach (SKPath path in inProgressPaths.Values)
+            foreach (var draw in inProgressPaths.Values)
             {
-                canvas.DrawPath(path, paint);
+                canvas.DrawPath(draw.SKPath, draw.Paint);
             }
         }
 
@@ -93,5 +100,9 @@ namespace PracaDyplomowa.Mobile.Views
                                (float)(canvasView.CanvasSize.Height * pt.Y / canvasView.Height));
         }
 
+        private void Button_Clicked(object sender, System.EventArgs e)
+        {
+            paint.Color = ((Button)sender).BackgroundColor.ToSKColor();
+        }
     }
 }
