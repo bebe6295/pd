@@ -1,12 +1,10 @@
 ﻿using RestSharp;
-using System.IO;
 
 namespace PracaDyplomowa.Mobile.Services
 {
     public class MobileApiService
     {
         private readonly IRestClient _restClient;
-        string _urlBase = "";
 
         public MobileApiService(IRestClient restClient)
         {
@@ -17,7 +15,7 @@ namespace PracaDyplomowa.Mobile.Services
         {
             var request = new RestRequest("api/WritingRecognition/CheckWriting", Method.POST);
             request.AddFileBytes("photo", file, "photo");
-            
+
             var response = _restClient.Execute<CheckWritingResponse>(request);
 
             return response.Data.Text;

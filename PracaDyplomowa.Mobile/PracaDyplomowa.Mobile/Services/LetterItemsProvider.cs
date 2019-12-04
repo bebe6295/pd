@@ -12,8 +12,8 @@ namespace PracaDyplomowa.Mobile.Services
         {
             var assembly = typeof(ImageResourceExtension).GetTypeInfo().Assembly;
             return assembly.GetManifestResourceNames()
-                           .Where(x => x.StartsWith("PracaDyplomowa.Mobile.Letters.Small") ||
-                                       x.StartsWith("PracaDyplomowa.Mobile.Letters.Large"))
+                           .Where(x => x.StartsWith("PracaDyplomowa.Mobile.Assets.Letters.Small") ||
+                                       x.StartsWith("PracaDyplomowa.Mobile.Assets.Letters.Large"))
                            .Select(x => new Source
                            {
                                ImageUri = x,

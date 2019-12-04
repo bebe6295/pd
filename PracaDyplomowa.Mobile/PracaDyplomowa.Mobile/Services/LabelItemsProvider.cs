@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using PracaDyplomowa.Mobile.Extensions;
 using PracaDyplomowa.Mobile.Logic;
+using RestSharp;
 
 namespace PracaDyplomowa.Mobile.Services
 {
@@ -18,6 +19,25 @@ namespace PracaDyplomowa.Mobile.Services
                                ImageUri = x,
                                Label = x.Split('.').Reverse().Skip(1).First()
                            });
+        }
+    }
+
+    public class LabelItemsOnlineProvider : IGameItemsProvider<Source>
+    {
+        private readonly IRestClient _restClient;
+
+        public LabelItemsOnlineProvider(IRestClient restClient)
+        {
+            _restClient = restClient;
+        }
+
+        public IEnumerable<Source> GetGameItems()
+        {
+            var request = new RestRequest("Games/GetLabelItems", Method.GET);
+
+            var response = _restClient.Execute<List<Source>>(request);
+
+            return response.Data;
         }
     }
 }

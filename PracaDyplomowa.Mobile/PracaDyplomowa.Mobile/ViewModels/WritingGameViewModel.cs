@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace PracaDyplomowa.Mobile.ViewModels
@@ -14,14 +15,17 @@ namespace PracaDyplomowa.Mobile.ViewModels
     {
         ICollection<Source> _letters;
         private ImageSource _letter;
+        private readonly MobileApiService _mobileApiService;
 
+        public ICommand MyProperty { get; set; }
         public ImageSource Letter { get => _letter; set => SetField(ref _letter, value); }
 
-        public WritingGameViewModel()
+        public WritingGameViewModel(MobileApiService mobileApiService)
         {
             var imageProvider = new LetterItemsProvider();
             _letters = imageProvider.GetGameItems().ToList();
             SetNewLetter();
+            _mobileApiService = mobileApiService;
         }
 
         private void SetNewLetter()

@@ -1,4 +1,7 @@
-﻿using PracaDyplomowa.Mobile.TouchTracking;
+﻿using PracaDyplomowa.Mobile.Services;
+using PracaDyplomowa.Mobile.TouchTracking;
+using PracaDyplomowa.Mobile.ViewModels;
+using RestSharp;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
@@ -27,6 +30,10 @@ namespace PracaDyplomowa.Mobile.Views
         public WritingGamePage()
         {
             InitializeComponent();
+
+            var client = new RestClient(string.Empty);
+            var mobileApiClient = new MobileApiService(client);
+            BindingContext = new WritingGameViewModel(mobileApiClient);
         }
 
         void OnTouchEffectAction(object sender, TouchActionEventArgs args)
@@ -74,8 +81,6 @@ namespace PracaDyplomowa.Mobile.Views
         void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
             SKCanvas canvas = args.Surface.Canvas;
-
-            //args.Surface.Snapshot().ToShader().;
             canvas.Clear();
 
             foreach (SKPath path in completedPaths)
