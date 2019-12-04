@@ -18,7 +18,7 @@ namespace PracaDyplomowa.Mobile.Services
 
             var response = _restClient.Execute<CheckWritingResponse>(request);
 
-            return response.Data.Text;
+            return response.Data?.Text;
         }
 
         public class CheckWritingResponse

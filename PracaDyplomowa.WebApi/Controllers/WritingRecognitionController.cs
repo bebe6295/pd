@@ -17,7 +17,7 @@ namespace PracaDyplomowa.WebApi.Controllers
             _ocrRead = new TesseractOcrReader(HttpContext.Current.Server.MapPath(@"~/tessdata"));
         }
 
-        public async Task<string> CheckWriting()
+        public async Task<CheckWritingResponse> CheckWriting()
         {
             if (!Request.Content.IsMimeMultipartContent())
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
@@ -29,10 +29,15 @@ namespace PracaDyplomowa.WebApi.Controllers
                 var filename = file.Headers.ContentDisposition.FileName.Trim('\"');
                 var stream = await file.ReadAsStreamAsync();
                 var result = _ocrRead.GetLetter(stream);
-                return result;
+                return new CheckWritingResponse { Text = result };
             }
 
-            return string.Empty;
+            return new CheckWritingResponse { Text = string.Empty };
+        }
+
+        public class CheckWritingResponse
+        {
+            public string Text { get; set; }
         }
     }
 }

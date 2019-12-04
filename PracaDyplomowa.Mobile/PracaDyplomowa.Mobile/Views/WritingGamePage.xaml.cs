@@ -4,9 +4,8 @@ using PracaDyplomowa.Mobile.ViewModels;
 using RestSharp;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
-using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,18 +21,19 @@ namespace PracaDyplomowa.Mobile.Views
         {
             Style = SKPaintStyle.Stroke,
             Color = SKColors.Blue,
-            StrokeWidth = 10,
+            StrokeWidth = 15,
             StrokeCap = SKStrokeCap.Round,
             StrokeJoin = SKStrokeJoin.Round
         };
+        private readonly MobileApiService _mobileApiClient;
 
         public WritingGamePage()
         {
             InitializeComponent();
 
-            var client = new RestClient(string.Empty);
-            var mobileApiClient = new MobileApiService(client);
-            BindingContext = new WritingGameViewModel(mobileApiClient);
+            var client = new RestClient("http://localhost:52958/");
+            _mobileApiClient = new MobileApiService(client);
+            BindingContext = new WritingGameViewModel(_mobileApiClient);
         }
 
         void OnTouchEffectAction(object sender, TouchActionEventArgs args)
@@ -92,6 +92,14 @@ namespace PracaDyplomowa.Mobile.Views
             {
                 canvas.DrawPath(path, paint);
             }
+
+            if (completedPaths.Count == 1)
+            {
+                var a = _mobileApiClient.CheckWriting(args.Surface.Snapshot().Encode().ToArray());
+                Debug.WriteLine(a);
+
+            }
+
         }
 
         SKPoint ConvertToPixel(Point pt)
