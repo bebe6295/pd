@@ -26,6 +26,7 @@ namespace PracaDyplomowa.Mobile.Views
             StrokeJoin = SKStrokeJoin.Round
         };
         private readonly MobileApiService _mobileApiClient;
+        private WritingGameViewModel vm;
 
         public WritingGamePage()
         {
@@ -33,7 +34,9 @@ namespace PracaDyplomowa.Mobile.Views
 
             var client = new RestClient("http://localhost:52958/");
             _mobileApiClient = new MobileApiService(client);
-            BindingContext = new WritingGameViewModel(_mobileApiClient);
+            vm = new WritingGameViewModel(_mobileApiClient);
+            BindingContext = vm;
+
         }
 
         void OnTouchEffectAction(object sender, TouchActionEventArgs args)
@@ -64,6 +67,13 @@ namespace PracaDyplomowa.Mobile.Views
                     {
                         completedPaths.Add(inProgressPaths[args.Id]);
                         inProgressPaths.Remove(args.Id);
+                        var l = vm.Letter;
+                        //vm.CheckIfMatchCommand.Execute(args.Surface.Snapshot().Encode().ToArray());
+                        if (vm.Letter != l)
+                        {
+                            inProgressPaths = new Dictionary<long, SKPath>();
+                            completedPaths = new List<SKPath>();
+                        }
                         canvasView.InvalidateSurface();
                     }
                     break;
@@ -91,13 +101,6 @@ namespace PracaDyplomowa.Mobile.Views
             foreach (SKPath path in inProgressPaths.Values)
             {
                 canvas.DrawPath(path, paint);
-            }
-
-            if (completedPaths.Count == 1)
-            {
-                var a = _mobileApiClient.CheckWriting(args.Surface.Snapshot().Encode().ToArray());
-                Debug.WriteLine(a);
-
             }
 
         }

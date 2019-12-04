@@ -10,10 +10,11 @@
              NavigationPage.HasNavigationBar="False"
              x:Class="PracaDyplomowa.Mobile.Views.WritingGamePage">
     <Grid BackgroundColor="White">
-        <Image x:Name="letter" Source="{Binding Letter}" Margin="0"/>
+        <Image x:Name="letter" Source="{Binding LetterSource}" Margin="0"/>
         <skia:SKCanvasView x:Name="canvasView" 
                            PaintSurface="OnCanvasViewPaintSurface">
         </skia:SKCanvasView>
+        <Label Text="{Binding Status}" />
         <Grid.Effects>
             <tt:TouchEffect Capture="True"
                             TouchAction="OnTouchEffectAction" />
